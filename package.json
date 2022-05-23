@@ -1,0 +1,54 @@
+{
+  "name": "typescript-boilerplate",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "preversion": "npm run test && npm run docs-auto",
+    "prepack": "NODE_ENV=production npm run build",
+    "build": "webpack",
+    "prepare": "husky install",
+    "docs": "typedoc src/index.ts",
+    "docs-auto": "npm run docs && git add -A docs && git diff-index --quiet HEAD || git commit -m 'docs: update'",
+    "test": "ava"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^17.0.35",
+    "@types/webpack": "^5.28.0",
+    "@typescript-eslint/eslint-plugin": "^5.25.0",
+    "@typescript-eslint/parser": "^5.25.0",
+    "ava": "^4.2.0",
+    "clean-webpack-plugin": "^4.0.0",
+    "eslint-config-prettier": "^8.5.0",
+    "husky": "^7.0.4",
+    "lint-staged": "^12.3.4",
+    "prettier": "^2.6.2",
+    "ts-loader": "^9.2.6",
+    "ts-node": "^10.5.0",
+    "typedoc": "^0.22.15",
+    "typedoc-plugin-markdown": "^3.12.1",
+    "typescript": "^4.6.4",
+    "webpack": "^5.69.1",
+    "webpack-cli": "^4.9.2"
+  },
+  "ava": {
+    "extensions": [
+      "ts"
+    ],
+    "require": [
+      "ts-node/register"
+    ]
+  },
+  "lint-staged": {
+    "*.{js,ts}": [
+      "eslint --cache --fix",
+      "prettier --write"
+    ],
+    "*.{md}": "prettier --write"
+  },
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ]
+}
